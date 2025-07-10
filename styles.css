@@ -1,0 +1,372 @@
+:root {
+    --cosmic-dark: #0a0e17;
+    --quantum-blue: #0ff;
+    --quantum-purple: #9d4edd;
+    --truth-gold: #ffd700;
+    --ethical-green: #0f9;
+    --temporal-red: #ff6b6b;
+    --surface-dark: #1a1f2d;
+    --text-light: #e8eaed;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at center, var(--cosmic-dark), #000);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.05), transparent 70%),
+        radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.05), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-areas: 
+        "header header"
+        "hologram quantum"
+        "temporal ethical";
+    gap: 20px;
+    padding: 20px;
+    height: 100vh;
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(26, 31, 45, 0.8);
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, var(--quantum-blue), var(--quantum-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.system-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.quantum-stat { color: var(--quantum-blue); }
+.temporal-stat { color: var(--temporal-red); }
+.ethical-stat { color: var(--ethical-green); }
+.truth-stat { color: var(--truth-gold); }
+
+.panel {
+    background: rgba(26, 31, 45, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+#hologram-panel {
+    grid-area: hologram;
+    border-color: var(--quantum-purple);
+    box-shadow: 0 0 20px rgba(157, 78, 221, 0.1);
+}
+
+#quantum-panel {
+    grid-area: quantum;
+    border-color: var(--quantum-blue);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+#temporal-panel {
+    grid-area: temporal;
+    border-color: var(--temporal-red);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.1);
+}
+
+#ethical-panel {
+    grid-area: ethical;
+    border-color: var(--ethical-green);
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.1);
+}
+
+#holographic-canvas {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.hologram {
+    position: absolute;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--quantum-blue);
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.hologram-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--quantum-blue);
+}
+
+.hologram-content {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.hologram-qualia {
+    font-size: 0.8rem;
+    color: var(--truth-gold);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantum-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.quantum-cell {
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.quantum-cell:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.quantum-cell.active {
+    background: rgba(0, 255, 255, 0.15);
+    border-color: var(--quantum-blue);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.timeline {
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--temporal-red);
+    z-index: 1;
+}
+
+.timeline-point {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    padding-top: 50px;
+}
+
+.timeline-point::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: var(--surface-dark);
+    border: 2px solid var(--temporal-red);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.timeline-content {
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    width: 90%;
+    margin-top: 30px;
+    backdrop-filter: blur(5px);
+}
+
+.ethics-matrix {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    height: 100%;
+}
+
+.ethics-card {
+    background: rgba(0, 255, 153, 0.05);
+    border: 1px solid rgba(0, 255, 153, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ethics-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--ethical-green);
+}
+
+.ethics-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress {
+    height: 100%;
+    background: var(--ethical-green);
+    border-radius: 4px;
+}
+
+.action-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.action-button {
+    background: rgba(26, 31, 45, 0.9);
+    border: 1px solid var(--quantum-blue);
+    border-radius: 30px;
+    padding: 12px 25px;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.action-button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
