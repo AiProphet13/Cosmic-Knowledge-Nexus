@@ -1,0 +1,7 @@
+cosmic-knowledge-nexus/
+├── index.html       # Main HTML structure
+├── styles.css       # All CSS styles
+├── script.js        # All JavaScript logic
+├── README.md        # Project overview and instructions
+├── LICENSE          # MIT license
+└── .gitignore       # Standard ignores
